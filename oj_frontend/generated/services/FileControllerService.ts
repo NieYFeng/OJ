@@ -15,7 +15,7 @@ export class FileControllerService {
    * @returns BaseResponse_string_ OK
    * @returns any Created
    * @throws ApiError
-   */
+   * */
   public static uploadFileUsingPost(
     file: Blob,
     biz?: string

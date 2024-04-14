@@ -1,5 +1,5 @@
 <template>
-  <div id="basiclayout">
+  <div id="basicLayout">
     <a-layout style="min-height: 100vh">
       <a-layout-header class="header">
         <GlobalHeader />
@@ -7,27 +7,29 @@
       <a-layout-content class="content">
         <router-view />
       </a-layout-content>
-      <a-layout-footer class="footer">Footer</a-layout-footer>
+      <a-layout-footer class="footer">
+        <a href="https://yupi.icu" target="_blank"> 毕业设计 </a>
+      </a-layout-footer>
     </a-layout>
   </div>
 </template>
 
 <style scoped>
-#basiclayout {
+#basicLayout {
 }
 
-#basiclayout .header {
+#basicLayout .header {
   margin-bottom: 16px;
   box-shadow: #eee 1px 1px 5px;
 }
 
-#basiclayout .content {
-  background: linear-gradient(to right, #bbb, #fff);
+#basicLayout .content {
+  background: linear-gradient(to right, #fefefe, #fff);
   margin-bottom: 16px;
   padding: 20px;
 }
 
-#basiclayout .footer {
+#basicLayout .footer {
   background: #efefef;
   padding: 16px;
   position: sticky;

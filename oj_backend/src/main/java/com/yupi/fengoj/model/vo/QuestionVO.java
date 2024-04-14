@@ -16,9 +16,9 @@ import java.util.List;
 
 /**
  * 题目
- * @TableName questions
+ * @TableName question
  */
-@TableName(value ="questions")
+@TableName(value ="question")
 @Data
 public class QuestionVO implements Serializable {
     /**

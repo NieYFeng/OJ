@@ -27,7 +27,7 @@ create table if not exists user
 ) comment '用户' collate = utf8mb4_unicode_ci;
 
 -- 题目表
-create table if not exists questions_submit
+create table if not exists questions
 (
     id         bigint auto_increment comment 'id' primary key,
     title      varchar(512)                       null comment '标题',
@@ -48,7 +48,7 @@ create table if not exists questions_submit
 ) comment '题目';
 
 -- 帖子表
-create table if not exists post
+create table if not exists questions_submit
 (
     id         bigint auto_increment comment 'id' primary key,
     language   varchar(128)                       not null comment '编程语言',

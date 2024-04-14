@@ -7,7 +7,7 @@ export default {
   namespaced: true,
   state: () => ({
     loginUser: {
-      userName: "未登陆",
+      userName: "枫",
     },
   }),
   actions: {

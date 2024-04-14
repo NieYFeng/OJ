@@ -4,13 +4,16 @@ import com.baomidou.mybatisplus.annotation.*;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+
+import com.yupi.fengoj.model.dto.question.JudgeCase;
 import lombok.Data;
 
 /**
  * 题目
- * @TableName questions
+ * @ question
  */
-@TableName(value ="questions")
+@TableName(value ="question")
 @Data
 public class Question implements Serializable {
     /**
@@ -50,12 +53,13 @@ public class Question implements Serializable {
     private Integer acceptedNum;
 
     /**
-     * 判题用例(json数组)
+     * 判题用例（json 数组）
      */
+    //private List<JudgeCase> judgeCase;
     private String judgeCase;
 
     /**
-     * 判题配置(json数组)
+     * 判题配置（json 对象）
      */
     private String judgeConfig;
 
