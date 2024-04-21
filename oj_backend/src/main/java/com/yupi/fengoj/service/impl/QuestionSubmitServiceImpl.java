@@ -1,14 +1,12 @@
 package com.yupi.fengoj.service.impl;
 
-
-
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yupi.fengoj.common.ErrorCode;
 import com.yupi.fengoj.constant.CommonConstant;
 import com.yupi.fengoj.exception.BusinessException;
-//import com.yupi.fengoj.judge.JudgeService;
+import com.yupi.fengoj.judge.JudgeService;
 import com.yupi.fengoj.mapper.QuestionSubmitMapper;
 import com.yupi.fengoj.model.dto.questionsubmit.QuestionSubmitAddRequest;
 import com.yupi.fengoj.model.dto.questionsubmit.QuestionSubmitQueryRequest;
@@ -18,7 +16,6 @@ import com.yupi.fengoj.model.entity.User;
 import com.yupi.fengoj.model.enums.QuestionSubmitLanguageEnum;
 import com.yupi.fengoj.model.enums.QuestionSubmitStatusEnum;
 import com.yupi.fengoj.model.vo.QuestionSubmitVO;
-import com.yupi.fengoj.model.vo.UserVO;
 import com.yupi.fengoj.service.QuestionService;
 import com.yupi.fengoj.service.QuestionSubmitService;
 import com.yupi.fengoj.service.UserService;
@@ -41,7 +38,7 @@ import java.util.stream.Collectors;
  */
 @Service
 public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper, QuestionSubmit>
-        implements QuestionSubmitService {
+        implements QuestionSubmitService{
 
     @Resource
     private QuestionService questionService;
@@ -49,9 +46,9 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
     @Resource
     private UserService userService;
 
-//    @Resource
-//    @Lazy
-//    private JudgeService judgeService;
+    @Resource
+    @Lazy
+    private JudgeService judgeService;
 
     /**
      * 提交题目
@@ -64,12 +61,12 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
     public long doQuestionSubmit(QuestionSubmitAddRequest questionSubmitAddRequest, User loginUser) {
         // 校验编程语言是否合法
         String language = questionSubmitAddRequest.getLanguage();
-        //System.out.println(language);
         QuestionSubmitLanguageEnum languageEnum = QuestionSubmitLanguageEnum.getEnumByValue(language);
         if (languageEnum == null) {
             throw new BusinessException(ErrorCode.PARAMS_ERROR, "编程语言错误");
         }
         long questionId = questionSubmitAddRequest.getQuestionId();
+        System.out.println("题目标签为"+questionId);
         // 判断实体是否存在，根据类别获取实体
         Question question = questionService.getById(questionId);
         if (question == null) {
@@ -87,14 +84,14 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
         questionSubmit.setStatus(QuestionSubmitStatusEnum.WAITING.getValue());
         questionSubmit.setJudgeInfo("{}");
         boolean save = this.save(questionSubmit);
-        if (!save) {
+        if (!save){
             throw new BusinessException(ErrorCode.SYSTEM_ERROR, "数据插入失败");
         }
         Long questionSubmitId = questionSubmit.getId();
-//        // 执行判题服务
-//        CompletableFuture.runAsync(() -> {
-//            judgeService.doJudge(questionSubmitId);
-//        });
+        // 执行判题服务
+        CompletableFuture.runAsync(() -> {
+            judgeService.doJudge(questionSubmitId);
+        });
         return questionSubmitId;
     }
 
@@ -141,7 +138,6 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
         return questionSubmitVO;
     }
 
-
     @Override
     public Page<QuestionSubmitVO> getQuestionSubmitVOPage(Page<QuestionSubmit> questionSubmitPage, User loginUser) {
         List<QuestionSubmit> questionSubmitList = questionSubmitPage.getRecords();
@@ -155,9 +151,9 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
         questionSubmitVOPage.setRecords(questionSubmitVOList);
         return questionSubmitVOPage;
     }
+
+
 }
-
-
 
 
 

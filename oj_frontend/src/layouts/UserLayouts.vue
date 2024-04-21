@@ -17,7 +17,7 @@
 
 <style scoped>
 #userlayout {
-  background: url("../assets/bg.jpg");
+  background: url("../assets/background.jpeg");
 }
 
 #userlayout .logo {

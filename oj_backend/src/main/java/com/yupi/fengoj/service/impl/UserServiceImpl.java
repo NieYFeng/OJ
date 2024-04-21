@@ -99,7 +99,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         queryWrapper.eq("userAccount", userAccount);
         queryWrapper.eq("userPassword", encryptPassword);
         User user = this.baseMapper.selectOne(queryWrapper);
-        System.out.println("用户名是"+userAccount);
         // 用户不存在
         if (user == null) {
             log.info("user login failed, userAccount cannot match userPassword");

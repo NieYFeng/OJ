@@ -1,7 +1,7 @@
 import { RouteRecordRaw } from "vue-router";
 import HomeView from "@/views/HomeView.vue";
 import Admin from "@/views/AdminView.vue";
-import NoAuthView from "@/views/NoAuthView.vue";
+//import NoAuthView from "@/views/NoAuthView.vue";
 import ACCESS_ENUM from "@/access/accessEnum";
 import UserRegisterView from "@/views/user/UserRegisterView.vue";
 import UserLoginView from "@/views/user/UserLoginView.vue";
@@ -10,6 +10,7 @@ import AddQuestionView from "@/views/question/AddQuestionView.vue";
 import ManageQuestionView from "@/views/question/ManageQuestionView.vue";
 import QuestionsView from "@/views/question/QuestionsView.vue";
 import ViewQuestionView from "@/views/question/ViewQuestionView.vue";
+import QuestionSubmitView from "@/views/question/QuestionSubmitView.vue";
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -34,9 +35,14 @@ export const routes: Array<RouteRecordRaw> = [
     ],
   },
   {
-    path: "/question",
+    path: "/questions",
     name: "浏览题目",
     component: QuestionsView,
+  },
+  {
+    path: "/question_submit",
+    name: "浏览题目提交",
+    component: QuestionSubmitView,
   },
   {
     path: "/view/question/:id",
@@ -87,14 +93,14 @@ export const routes: Array<RouteRecordRaw> = [
   //     hideInMenu: true,
   //   },
   // },
-  {
-    path: "/noAuth",
-    name: "无权限",
-    component: NoAuthView,
-    meta: {
-      hideInMenu: true,
-    },
-  },
+  // {
+  //   path: "/noAuth",
+  //   name: "无权限",
+  //   component: NoAuthView,
+  //   meta: {
+  //     hideInMenu: true,
+  //   },
+  // },
   // {
   //   path: "/admin",
   //   name: "管理员可见",

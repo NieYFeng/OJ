@@ -27,6 +27,9 @@
   background: linear-gradient(to right, #fefefe, #fff);
   margin-bottom: 16px;
   padding: 20px;
+  background: rgba(255, 255, 255, 0.8) url("../assets/background.jpeg")
+    no-repeat center center;
+  background-size: cover;
 }
 
 #basicLayout .footer {
